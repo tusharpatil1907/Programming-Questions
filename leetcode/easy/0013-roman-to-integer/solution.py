@@ -1,6 +1,6 @@
 class Solution(object):
     def romanToInt(self, s):
-        roman_to_int_map = {
+        values = {
         'I': 1,
         'V': 5,
         'X': 10,
@@ -11,17 +11,12 @@ class Solution(object):
         }
     
         total = 0
-        prev_value = 0
        
-        for char in s:
-            current_value = roman_to_int_map[char]
-         
-            if current_value > prev_value:
-                total += current_value - 2 * prev_value
+        for i in range(len(s)):
+            if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:
+                total -= values[s[i]]
             else:
-                total += current_value
-            
-            prev_value = current_value
+                total += values[s[i]]
         
         return total
         
