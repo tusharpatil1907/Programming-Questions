@@ -67,14 +67,14 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 ## Solution
 
 **Language:** Python  
-**Runtime:** 7 ms (beats 74.39%)  
-**Memory:** 12.2 MB (beats 98.23%)  
-**Submitted:** 2026-10-18T19:29:20.788Z  
+**Runtime:** 17 ms (beats 14.03%)  
+**Memory:** 12.1 MB (beats 98.23%)  
+**Submitted:** 2026-10-18T19:31:56.279Z  
 
 ```py
 class Solution(object):
     def romanToInt(self, s):
-        roman_to_int_map = {
+        values = {
         'I': 1,
         'V': 5,
         'X': 10,
@@ -85,17 +85,12 @@ class Solution(object):
         }
     
         total = 0
-        prev_value = 0
        
-        for char in s:
-            current_value = roman_to_int_map[char]
-         
-            if current_value > prev_value:
-                total += current_value - 2 * prev_value
+        for i in range(len(s)):
+            if i + 1 < len(s) and values[s[i]] < values[s[i + 1]]:
+                total -= values[s[i]]
             else:
-                total += current_value
-            
-            prev_value = current_value
+                total += values[s[i]]
         
         return total
         
